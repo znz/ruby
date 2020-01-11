@@ -55,7 +55,7 @@ jobs:
       # Not using official actions/checkout because it's unstable and sometimes doesn't work for a fork.
       - name: Checkout ruby
         run: |
-          git clone --single-branch --shallow-since=yesterday --branch=${{ github.ref }} https://github.com/${{ github.repository }} src
+          git clone --single-branch --shallow-since=yesterday --branch=${{ github.ref.split('/').reverse()[0] }} https://github.com/${{ github.repository }} src
           git -C src reset --hard "$GITHUB_SHA"
         if: github.event_name == 'push'
       - name: Checkout a pull request
